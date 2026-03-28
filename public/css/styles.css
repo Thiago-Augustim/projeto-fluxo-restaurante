@@ -1,0 +1,27 @@
+:root{
+    --cinzaEscuro: #414141;
+    --cinzaClaro: #E3E3E3;
+    --branco: #FFFFFF;
+    --mesaLivreColor: #9EFE95;  
+    --mesaReservadaColor: #5D8BFF;
+    --mesaOcupadaColor: #F3383B;
+    --buttonsColor: #3b72fc;
+}
+
+.bg-cinzaEscuro{
+    background-color: var(--cinzaEscuro);
+}
+
+.nav-link.active    {
+    color: var(--cinzaClaro) !important;
+}
+
+.nav-link{
+    color: var(--branco);
+}
+
+.nav-link:hover{
+    color: var(--cinzaClaro);
+}
+
+
