@@ -72,13 +72,13 @@ include '../partials/header.php';
                     <h5>Status:</h5>
                     <div class="dropdown">
                         <button class="btn btn-secondary bg-light text-secondary dropdown-toggle p-2 ps-4 pe-4 " type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span id="painel-status">Livre</span>
+                            <span id="painel-status"></span>
                         </button>
 
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item status-mesa" href="#">Livre</a></li>
-                            <li><a class="dropdown-item status-mesa" href="#">Ocupado</a></li>
-                            <li><a class="dropdown-item status-mesa" href="#">Reservado</a></li>
+                            <li><a class="dropdown-item status-mesa" href="#">Ocupada</a></li>
+                            <li><a class="dropdown-item status-mesa" href="#">Reservada</a></li>
                         </ul>
                     </div>
 

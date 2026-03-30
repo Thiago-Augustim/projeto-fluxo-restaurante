@@ -1,5 +1,7 @@
 // Script mesas
-let idMesaSelecionada = null;
+let mesaSelecionada =[
+    { id: null, numero: null, cadeiras: null, status: null },
+]
 
 // Adiciona evento de clique a cada card de mesa
 document.querySelectorAll('.card-mesa').forEach(card => {
@@ -15,7 +17,7 @@ function selecionarMesa(mesa) {
     document.getElementById('painel-numero').textContent = 'Mesa ' + mesa.numero;
     document.getElementById('painel-cadeiras').textContent = mesa.cadeiras;
     document.getElementById('painel-status').textContent = mesa.status;
-    idMesaSelecionada = mesa.id;
+    mesaSelecionada = mesa;
 
 }
 
@@ -24,9 +26,35 @@ document.querySelectorAll('.status-mesa').forEach(item => {
     item.addEventListener('click', function (event) {
         event.preventDefault();
         const novoStatus = this.textContent;
-        console.log('Novo status selecionado:', novoStatus);
+
+        console.log('Mesa selecionada Antes:', mesaSelecionada);
+        mesaSelecionada.status = novoStatus;
+
+        console.log('Status atualizado na mesa selecionada:', mesaSelecionada);
+
+        // Atualiza o texto do botão de status no painel lateral
+        document.getElementById('painel-status').textContent = novoStatus;  
+
+        //Aqui encaminhará um put para o servidor para atualizar o status da mesa no backend,
+        // mas por enquanto, vamos apenas atualizar a cor do card da mesa no frontend
+        //se o backend retornar sucesso, atualizamos a cor do card da mesa
+
+        atualizarCorMesa(mesaSelecionada, novoStatus);
         
-    
     });
 }); 
+
+function atualizarCorMesa(mesa, novoStatus) {
+    const card = [...document.querySelectorAll('.card-mesa')]
+        .find(c => JSON.parse(c.dataset.mesa).numero === mesa.numero);
+
+    if (card) {
+        card.style.backgroundColor = `var(--mesa${novoStatus}Color)`;
+        mesa.status = novoStatus.toLowerCase();
+        card.dataset.mesa = JSON.stringify(mesa);
+    }
+}
+
+
+
 
