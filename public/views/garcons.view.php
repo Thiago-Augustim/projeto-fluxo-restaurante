@@ -19,8 +19,8 @@ include '../partials/header.php';
 
                 <h5 class="mb-0">Equipe</h5>
 
-                <button type="button" class="btn px-5 btn-hover"
-                    style="background-color: var(--buttonsColor); color: var(--branco)">
+                <button class="btn px-5 btn-hover" data-bs-toggle="modal" data-bs-target="#modalFuncionario"
+                    style="background-color: var(--buttonsColor); color: var(--branco)"> 
                     Novo Funcionário
                 </button>
 
@@ -81,6 +81,38 @@ include '../partials/header.php';
         </div>
     </div>
 
+</div>
+
+<!-- Tela para subir e add novo funcionario -->
+<div class="modal fade" id="modalFuncionario">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <form method="POST" action="add_garcom.php">
+
+                <div class="modal-header">
+                    <h5>Novo Funcionário</h5>
+                </div>
+
+                <div class="modal-body">
+
+                    <input type="text" name="nome" class="form-control mb-3" placeholder="Nome" required>
+
+                    <select name="especialidade" class="form-control">
+                        <option value="garcom">Garçom</option>
+                        <option value="cozinha">Cozinha</option>
+                    </select>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Salvar</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
 </div>
 
 <?php include '../partials/footer.php'; ?>
