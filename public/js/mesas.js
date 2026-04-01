@@ -95,13 +95,25 @@ function ucfirst(str) {
 
 // ── Pedidos e Modal ────────────────────────────
 document.getElementById('btn-abrir-pedido').addEventListener('click', () => {
+
+    // 1. Verifica se selecionou mesa
     if (!mesaSelecionada || !mesaSelecionada.numero) {
         alert('Selecione uma mesa primeiro');
         return;
     }
+
+    // 2. Só permite se estiver OCUPADA
+    if (mesaSelecionada.status.toLowerCase() !== 'ocupada') {
+        alert('Só é possível fazer pedido em mesas ocupadas!');
+        return;
+    }
+
+    // 3. Abre o modal
     const modal = new bootstrap.Modal(document.getElementById('modalNovoPedido'));
     modal.show();
-    document.getElementById('label-mesa-produtos').textContent = 'Mesa ' + mesaSelecionada.numero;
+
+    document.getElementById('label-mesa-produtos').textContent =
+        'Mesa ' + mesaSelecionada.numero;
 });
 
 function renderizarPedidosDaMesa() {
