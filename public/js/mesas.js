@@ -51,7 +51,7 @@ function atualizarCorMesa(mesa, novoStatus) {
 
     if (card) {
         card.style.backgroundColor = `var(--mesa${novoStatus}Color)`;
-        mesa.status = novoStatus.toLowerCase();
+        mesa.status = ucfirst(novoStatus);
         card.dataset.mesa = JSON.stringify(mesa);
     }
 }
@@ -60,7 +60,7 @@ function atualizarCorMesa(mesa, novoStatus) {
 function cadastrarMesa() {
     const numero = document.getElementById('numero').value;
     const cadeiras = document.getElementById('cadeiras').value;
-    const status = document.getElementById('status').value;
+    const status = ucfirst(document.getElementById('status').value);
 
     if (!numero || !cadeiras) return alert('Preencha todos os campos.');
 
