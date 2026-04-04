@@ -35,9 +35,7 @@ include VIEWS . 'partials/header.php';
                     <div class="row g-3" id="listaMesas">
 
                         <!-- Faz um foreach em um array de mesas e preenche na tela -->
-                        <?php require MODELS . 'mesas.php'; ?>
-
-
+                        
                         <?php foreach ($mesas as $mesa): ?>
                             <div class="col-6 col-sm-4 col-md-3 col-lg-3">
                                 <div class="card text-center p-3 rounded card-mesa"

@@ -1,6 +1,6 @@
 <?php
 
-$mesas = [
+return[
     ['id' => 1, 'numero' => 1, 'cadeiras' => 5, 'status' => 'Livre'],
     ['id' => 2, 'numero' => 2, 'cadeiras' => 4, 'status' => 'Ocupada'],
     ['id' => 3, 'numero' => 3, 'cadeiras' => 6, 'status' => 'Reservada'],

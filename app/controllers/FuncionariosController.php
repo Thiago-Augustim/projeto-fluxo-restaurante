@@ -1,15 +1,12 @@
 <?php
 
-if (!isset($_SESSION['funcionarios'])) {
-    $_SESSION['funcionarios'] = [
-        ['id' => 1, 'nome' => 'João Silva', 'especialidade' => 'garcom'],
-        ['id' => 2, 'nome' => 'Maria Oliveira', 'especialidade' => 'garcom'],
-        ['id' => 3, 'nome' => 'Carlos Souza', 'especialidade' => 'cozinha'],
-        ['id' => 4, 'nome' => 'Ana Costa', 'especialidade' => 'cozinha'],
-    ];
+function funcionariosIndex(): void
+{
+    $funcionarios = require MODELS . 'Funcionarios.php';
+    require VIEWS . 'FuncionariosView.php';
 }
 
-
+/*
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $nome = $_POST['nome'] ?? null;
@@ -31,8 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // evita duplicar ao dar F5
-    header("Location: garcons.view.php");
+    header("Location: GarconsView.php");
     exit;
 }
 
-$funcionarios = $_SESSION['funcionarios'];
+$funcionarios = $_SESSION['funcionarios'];*/

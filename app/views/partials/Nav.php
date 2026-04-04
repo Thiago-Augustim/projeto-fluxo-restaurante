@@ -9,7 +9,7 @@
         <a class="nav-link <?php echo $paginaAtiva === 'comandas' ? 'active' : '' ?>" href="#" onclick="location.replace('<?php echo BASE_URL; ?>rota=comandas');return false   ;">Comandas</a>
     </li>
     <li class="nav-item ms-5">
-        <a class="nav-link <?php echo $paginaAtiva === 'garcons' ? 'active' : '' ?>" href="#" onclick="location.replace('<?php echo BASE_URL; ?>rota=garcons');return false;">Garçons</a>
+        <a class="nav-link <?php echo $paginaAtiva === 'funcionarios' ? 'active' : '' ?>" href="#" onclick="location.replace('<?php echo BASE_URL; ?>rota=funcionarios');return false;">Funcionários</a>
     </li>
     <li class="nav-item ms-5">
         <a class="nav-link <?php echo $paginaAtiva === 'relatorios' ? 'active' : '' ?>" href="#" onclick="location.replace('<?php echo BASE_URL; ?>rota=relatorios');return false;">Relatórios</a>

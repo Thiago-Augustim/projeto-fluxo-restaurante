@@ -30,16 +30,14 @@ include VIEWS . 'partials/header.php';
             <div class="p-3 rounded bg-cinzaClaro me-4 ms-4 flex-grow-1 rounded-4">
                 <div class="row g-3">
 
-                    <?php require MODELS . 'funcionarios.php'; ?>
-
-                    <?php foreach ($funcionarios as $garcom): ?>
+                    <?php foreach ($funcionarios as $funcionario): ?>
                         <div class="col-6 col-sm-4 col-md-3 col-lg-3">
                             <div class="card text-center p-3 rounded card-funcionario"
-                                data-funcionario='<?= htmlspecialchars(json_encode($garcom), ENT_QUOTES) ?>'
+                                data-funcionario='<?= htmlspecialchars(json_encode($funcionario), ENT_QUOTES) ?>'
                                 style="cursor:pointer;">
 
-                                <strong><?= $garcom['nome'] ?></strong>
-                                <span><?= ucfirst($garcom['especialidade']) ?></span>
+                                <strong><?= $funcionario['nome'] ?></strong>
+                                <span><?= ucfirst($funcionario['especialidade']) ?></span>
 
                             </div>
                         </div>
