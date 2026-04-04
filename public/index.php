@@ -6,8 +6,6 @@ $usuarios = [
     ['usuario' => 'carlos', 'senha' => '1234', 'tipo' => 'cozinha'],
 ];
 
-//teste push
-
 $erro = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -58,5 +56,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
 
     </div>
-    
+
 <?php include 'partials/footer.php'; ?>
