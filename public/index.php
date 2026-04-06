@@ -31,11 +31,3 @@ match($rota) {
     'funcionarios' => funcionariosIndex(),
     default => mesasIndex(),
 };
-
-
-
-
-
-
-
-
