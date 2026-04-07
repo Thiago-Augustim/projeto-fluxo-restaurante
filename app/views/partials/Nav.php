@@ -14,4 +14,7 @@
     <li class="nav-item ms-5">
         <a class="nav-link <?php echo $paginaAtiva === 'relatorios' ? 'active' : '' ?>" href="#" onclick="location.replace('<?php echo BASE_URL; ?>?rota=relatorios');return false;">Relatórios</a>
     </li>
+    <li class="nav-item ms-auto me-3">
+        <a href="<?= BASE_URL ?>?rota=logout" class="btn btn-danger px-4">Sair</a>
+    </li>
 </ul>

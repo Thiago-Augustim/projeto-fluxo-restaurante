@@ -8,12 +8,13 @@ define('BASE_URL', '/projeto-fluxo-restaurante/public/index.php');
 define('CONTROLLERS', ROOT . 'app/controllers/');
 
 require CONTROLLERS . 'MesasController.php';
+require CONTROLLERS . 'AuthController.php';
 require CONTROLLERS . 'FuncionariosController.php';
 
 session_start();
 
 
-$rota = $_GET['rota'] ?? 'mesas';
+$rota = $_GET['rota'] ?? 'login';
 $acao = $_GET['acao'] ?? 'index';
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -26,10 +27,22 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($rota === 'funcionarios' && $acao === 'cadastrar') {
         cadastrarFuncionario();
     }
+    if ($rota === 'login' && $acao === 'entrar') {
+        login();
+    }
+
+}
+
+if($_SERVER['REQUEST_METHOD'] === 'GET') {
+
+    if ($rota === 'logout') {
+        logout();
+    }
 
 }
 
 match($rota) {
+    'login' => loginIndex(),
     'mesas' => mesasIndex(),
     'funcionarios' => funcionariosIndex(),
     default => mesasIndex(),
