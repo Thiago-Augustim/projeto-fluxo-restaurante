@@ -2,34 +2,44 @@
 
 function funcionariosIndex(): void
 {
-    $funcionarios = require MODELS . 'Funcionarios.php';
+    if (!isset($_SESSION['funcionarios'])) {
+        $_SESSION['funcionarios'] = require MODELS . 'Funcionarios.php';
+    }
+
+    $funcionarios = $_SESSION['funcionarios'];
+
     require VIEWS . 'FuncionariosView.php';
 }
 
-/*
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
+function cadastrarFuncionario(): void
+{
     $nome = $_POST['nome'] ?? null;
     $especialidade = $_POST['especialidade'] ?? null;
+    $senha = $_POST['senha'] ?? null;
 
-    if ($nome && $especialidade) {
-
-        $funcionarios = $_SESSION['funcionarios'];
-
-        $novoId = count($funcionarios) + 1;
-
-        $funcionarios[] = [
-            'id' => $novoId,
-            'nome' => $nome,
-            'especialidade' => $especialidade
-        ];
-
-        $_SESSION['funcionarios'] = $funcionarios;
+    if (!$nome || !$especialidade || !$senha) {
+        $_SESSION['erros'] = ['Preencha todos os campos'];
+        header("Location: " . BASE_URL . "?rota=funcionarios");
+        exit;
     }
 
-    // evita duplicar ao dar F5
-    header("Location: GarconsView.php");
+    if (!isset($_SESSION['funcionarios'])) {
+        $_SESSION['funcionarios'] = require MODELS . 'Funcionarios.php';
+    }
+
+    $funcionarios = $_SESSION['funcionarios'];
+
+    $novoId = count($funcionarios) + 1;
+
+    $funcionarios[] = [
+        'id' => $novoId,
+        'nome' => $nome,
+        'especialidade' => $especialidade,
+        'senha' => password_hash($senha, PASSWORD_DEFAULT)
+    ];
+
+    $_SESSION['funcionarios'] = $funcionarios;
+
+    header("Location: " . BASE_URL . "?rota=funcionarios");
     exit;
 }
-
-$funcionarios = $_SESSION['funcionarios'];*/

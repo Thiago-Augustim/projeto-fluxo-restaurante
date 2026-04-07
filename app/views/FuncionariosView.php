@@ -82,25 +82,24 @@ include VIEWS . 'partials/header.php';
 </div>
 
 <!-- Tela para subir e add novo funcionario -->
-<div class="modal fade" id="modalFuncionario">
+<div class="modal fade" id="modalFuncionario" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
 
-            <form method="POST">
-
+            <form method="POST" action="<?= BASE_URL ?>?rota=funcionarios&acao=cadastrar">
                 <div class="modal-header">
                     <h5>Novo Funcionário</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
 
                 <div class="modal-body">
-
                     <input type="text" name="nome" class="form-control mb-3" placeholder="Nome" required>
-
+                    <input type="password" name="senha" class="form-control mb-3" placeholder="Senha" required>
                     <select name="especialidade" class="form-control">
                         <option value="garcom">Garçom</option>
                         <option value="cozinha">Cozinha</option>
+                        <option value="cozinha">Gerencia</option>
                     </select>
-
                 </div>
 
                 <div class="modal-footer">
@@ -108,7 +107,6 @@ include VIEWS . 'partials/header.php';
                 </div>
 
             </form>
-
         </div>
     </div>
 </div>

@@ -23,6 +23,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     if($rota === 'mesas' && $acao === 'alterarStatusMesa') {
         alterarStatusMesa();
     }
+    if ($rota === 'funcionarios' && $acao === 'cadastrar') {
+        cadastrarFuncionario();
+    }
 
 }
 
