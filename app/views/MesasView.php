@@ -86,7 +86,7 @@ include VIEWS . 'partials/header.php';
 
                     <h5>Status:</h5>
                     <div class="dropdown">
-                        
+
                         <!-- Caixa de erros para alterar o status da mesa -->
                         <?php if (!empty($_SESSION['erros'])): ?>
                             <div class="toast-container position-fixed top-0 end-0 p-3">
@@ -109,7 +109,7 @@ include VIEWS . 'partials/header.php';
                         <form method="POST" action="<?= BASE_URL ?>?rota=mesas&amp;acao=alterarStatusMesa">
 
                             <input type="hidden" name="id" class="input-mesa-id" value="">
-                                        
+
                             <select name="status" class="form-select" id="painel-status">
                                 <option value="livre">Livre</option>
                                 <option value="ocupada">Ocupada</option>
@@ -126,7 +126,17 @@ include VIEWS . 'partials/header.php';
 
                 <div class="p-3 bg-cinzaClaro rounded-4 me-4 ms-4 flex-grow-1">
                     <h5>Pedidos da Mesa</h5>
-                    <p>Selecione uma mesa para ver os pedidos</p>
+                    <div id="lista-pedidos">
+                        <p class="text-muted">Selecione uma mesa para ver os pedidos</p>
+                    </div>
+                    <hr>
+                    <p><strong>Total: R$ <span id="total-pedidos">0,00</span></strong></p>
+
+                    <button class="btn w-100 btn-hover mt-2"
+                        style="background-color: var(--buttonsColor); color: var(--branco);"
+                        data-bs-toggle="modal" data-bs-target="#modalCardapio">
+                        Cardápio
+                    </button>
                 </div>
 
             </div>
@@ -170,6 +180,42 @@ include VIEWS . 'partials/header.php';
             </div>
         </div>
     </form>
+
+    <!-- Modal Cardápio -->
+<div class="modal fade" id="modalCardapio" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <form method="POST" action="<?= BASE_URL ?>?rota=pedidos&acao=adicionar">
+                <input type="hidden" name="mesa_id" class="input-mesa-id" value="">
+                <input type="hidden" name="item"    value="Cardápio">
+                <input type="hidden" name="preco"   value="10.00">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Cardápio</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded-3">
+                        <span>Cardápio</span>
+                        <strong>R$ 10,00</strong>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Confirmar Pedido</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    const todosPedidos = <?= json_encode(array_values($_SESSION['pedidos'] ?? [])) ?>;
+</script>
 
     <?php
 
