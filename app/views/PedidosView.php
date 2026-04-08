@@ -11,7 +11,7 @@ $statusLabels = [
 ];
 
 
-//padrao cores
+
 $statusColors = [
     'aguardando' => '#b0b0b0',
     'cancelado'  => '#6c6c6c',
