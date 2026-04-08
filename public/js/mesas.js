@@ -40,19 +40,23 @@ function renderizarPedidos(mesaId) {
 
     let total = 0;
     let html = '<ul class="list-group">';
-    pedidosDaMesa.forEach(p => {
-        total += parseFloat(p.preco);
-        html += `<li class="list-group-item d-flex justify-content-between">
-            <span>${p.item}</span>
-            <span>R$ ${parseFloat(p.preco).toFixed(2).replace('.', ',')}</span>
-        </li>`;
-    });
-    html += '</ul>';
 
+    pedidosDaMesa.forEach(p => {
+        const itens = p.itens ?? [{ nome: p.item ?? '?', preco: p.preco ?? 0, qtd: 1 }];
+        
+        itens.forEach(item => {
+            total += parseFloat(item.preco) * item.qtd;
+            html += `<li class="list-group-item d-flex justify-content-between">
+                <span>${item.qtd}x ${item.nome}</span>
+                <span>R$ ${(parseFloat(item.preco) * item.qtd).toFixed(2).replace('.', ',')}</span>
+            </li>`;
+        });
+    });
+
+    html += '</ul>';
     lista.innerHTML = html;
     document.getElementById('total-pedidos').textContent = total.toFixed(2).replace('.', ',');
 }
-
 // Adiciona evento de clique a cada item do dropdown de status
 document.querySelectorAll('.status-mesa').forEach(item => {
     item.addEventListener('click', function (event) {

@@ -1,33 +1,49 @@
-document.getElementById('listaMesas').addEventListener('click', function (e) {
-    const card = e.target.closest('.card-mesa');
+// Clique em card de pedido
+document.getElementById('listaPedidos').addEventListener('click', function (e) {
+    const card = e.target.closest('.card-pedido');
     if (!card) return;
 
-    const mesa = JSON.parse(card.dataset.mesa);
-    document.getElementById('painel-numero').textContent = 'Mesa ' + mesa.numero;
-    renderizarPedidos(mesa.id);
+    document.querySelectorAll('.card-pedido').forEach(c => c.style.outline = 'none');
+    card.style.outline = '2px solid var(--buttonsColor)';
+
+    const pedido = JSON.parse(card.dataset.pedido);
+    atualizarPainel(pedido);
 });
 
-function renderizarPedidos(mesaId) {
-    const pedidosDaMesa = todosPedidos.filter(p => p.mesa_id == mesaId);
-    const lista = document.getElementById('lista-pedidos');
+function atualizarPainel(pedido) {
+    document.getElementById('painel-titulo').innerHTML = 'PEDIDO<br>#' + pedido.id;
+    document.getElementById('painel-mesa').textContent  = String(pedido.mesa_id).padStart(2, '0');
+    document.getElementById('input-pedido-id').value    = pedido.id;
 
-    if (pedidosDaMesa.length === 0) {
-        lista.innerHTML = '<p class="text-muted">Nenhum pedido ainda.</p>';
-        document.getElementById('total-pedidos').textContent = '0,00';
+    const container = document.getElementById('painel-itens');
+    if (!pedido.itens || pedido.itens.length === 0) {
+        container.innerHTML = '<p class="text-muted">Sem itens.</p>';
         return;
     }
 
-    let total = 0;
-    let html = '<ul class="list-group">';
-    pedidosDaMesa.forEach(p => {
-        total += parseFloat(p.preco);
-        html += `<li class="list-group-item d-flex justify-content-between">
-            <span>${p.item}</span>
-            <span>R$ ${parseFloat(p.preco).toFixed(2).replace('.', ',')}</span>
-        </li>`;
+    let html = '';
+    pedido.itens.forEach(item => {
+        html += `
+        <div class="bg-light border rounded-3 p-2 mb-2">
+            <strong>${item.nome}</strong>
+            <div class="text-muted" style="font-size:0.85rem;">
+                ${item.obs ? item.obs + ' ' : ''}${item.qtd}x
+            </div>
+        </div>`;
     });
-    html += '</ul>';
-
-    lista.innerHTML = html;
-    document.getElementById('total-pedidos').textContent = total.toFixed(2).replace('.', ',');
+    container.innerHTML = html;
 }
+
+// Filtros por status
+document.querySelectorAll('.btn-filtro').forEach(btn => {
+    btn.addEventListener('click', function () {
+        const status = this.dataset.status;
+        document.querySelectorAll('.card-pedido').forEach(card => {
+            if (status === 'todos' || card.dataset.status === status) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+});
