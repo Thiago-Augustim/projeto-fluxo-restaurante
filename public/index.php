@@ -10,6 +10,7 @@ define('CONTROLLERS', ROOT . 'app/controllers/');
 require CONTROLLERS . 'MesasController.php';
 require CONTROLLERS . 'LoginController.php';
 require CONTROLLERS . 'FuncionariosController.php';
+require CONTROLLERS . 'PedidosController.php';
 
 session_start();
 
@@ -37,6 +38,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         login();
     }
 
+    if ($rota === 'pedidos' && $acao === 'adicionar') {
+    adicionarPedido();
+    }
+    if ($rota === 'pedidos' && $acao === 'alterarStatus') {
+    alterarStatusPedido();
+    }
+
 }
 
 if($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -51,5 +59,6 @@ match($rota) {
     'login' => loginIndex(),
     'mesas' => mesasIndex(),
     'funcionarios' => funcionariosIndex(),
+    'pedidos' => pedidosIndex(),
     default => mesasIndex(),
 };

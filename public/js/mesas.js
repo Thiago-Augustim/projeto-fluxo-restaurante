@@ -19,22 +19,51 @@ function selecionarMesa(mesa) {
     document.getElementById('painel-cadeiras').textContent = mesa.cadeiras;
     document.getElementById('painel-status').value = mesa.status;
 
-    console.log('Atualizando painel lateral com a mesa:', mesa);
     mesaSelecionada = mesa;
 
     document.querySelectorAll('.input-mesa-id').forEach(input => {
         input.value = mesa.id;
     });
 
+    renderizarPedidos(mesa.id);
+}
+
+function renderizarPedidos(mesaId) {
+    const pedidosDaMesa = todosPedidos.filter(p => p.mesa_id == mesaId);
+    const lista = document.getElementById('lista-pedidos');
+
+    if (pedidosDaMesa.length === 0) {
+        lista.innerHTML = '<p class="text-muted">Nenhum pedido ainda.</p>';
+        document.getElementById('total-pedidos').textContent = '0,00';
+        return;
+    }
+
+    let total = 0;
+    let html = '<ul class="list-group">';
+
+    pedidosDaMesa.forEach(p => {
+        const itens = p.itens ?? [{ nome: p.item ?? '?', preco: p.preco ?? 0, qtd: 1 }];
+        
+        itens.forEach(item => {
+            total += parseFloat(item.preco) * item.qtd;
+            html += `<li class="list-group-item d-flex justify-content-between">
+                <span>${item.qtd}x ${item.nome}</span>
+                <span>R$ ${(parseFloat(item.preco) * item.qtd).toFixed(2).replace('.', ',')}</span>
+            </li>`;
+        });
+    });
+
+    html += '</ul>';
+    lista.innerHTML = html;
+    document.getElementById('total-pedidos').textContent = total.toFixed(2).replace('.', ',');
 }
 
 // Adiciona evento de clique a cada item do dropdown de status
 document.querySelectorAll('.status-mesa').forEach(item => {
     item.addEventListener('click', function (event) {
-        event.preventDefault();        
+        event.preventDefault();
 
-
-        
+        const novoStatus = this.dataset.status; // ← correção aqui
 
         // Atualiza o texto do botão de status no painel lateral
         atualizarCorMesa(mesaSelecionada, novoStatus);
