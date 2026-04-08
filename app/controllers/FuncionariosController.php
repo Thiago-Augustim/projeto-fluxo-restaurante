@@ -2,6 +2,11 @@
 
 function funcionariosIndex(): void
 {
+    if(!isset($_SESSION['logado'])){
+        header("Location: " . BASE_URL . "?rota=login");
+        exit();
+    }
+
     if (!isset($_SESSION['funcionarios'])) {
         $_SESSION['funcionarios'] = require MODELS . 'Funcionarios.php';
     }

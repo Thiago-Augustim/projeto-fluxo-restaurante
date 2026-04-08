@@ -3,6 +3,10 @@
 
 function mesasIndex(): void
 {
+    if(!isset($_SESSION['logado'])){
+        header("Location: " . BASE_URL . "?rota=login");
+        exit();
+    }
 
     //Se não haver uma sessão de mesas, ele carrega as mesas do arquivo e salva na sessão
     if (!isset($_SESSION['mesas'])){
