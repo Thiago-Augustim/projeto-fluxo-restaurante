@@ -32,7 +32,7 @@ include VIEWS . 'partials/header.php';
 
                 <!-- Container de Mesas -->
                 <div class="p-3 rounded bg-cinzaClaro me-4 ms-4 flex-grow-1 rounded-4">
-                    <div class="row g-3" id="listaMesas">
+                    <div class="row g-4" id="listaMesas">
 
 
 
@@ -103,11 +103,21 @@ include VIEWS . 'partials/header.php';
 
                 <div class="p-3 bg-cinzaClaro rounded-4 me-4 ms-4 flex-grow-1">
                     <h5>Pedidos da Mesa</h5>
-                    <p>Selecione uma mesa para ver os pedidos</p>
+                    <div class="d-flex justify-content-center bg">
+
+                        <form action="">
+                            <input id="input-mesa-id-pedido" type="hidden" value="">
+                            <input id="input-mesa-status-pedido" type="hidden" value="">
+                            <button id="btn-adicionar-pedido" class="btn px-5 btn-hover" style="background-color: var(--buttonsColor); color: var(--branco)" type="button">
+                                Adicionar Pedido
+                            </button>
+
+                        </form>
+                    </div>
                 </div>
- 
+
+            </div>
         </div>
-    </div>
     </div>
 
     <!-- Modal de Cadastro de Mesa -->

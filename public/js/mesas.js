@@ -19,22 +19,25 @@ function selecionarMesa(mesa) {
     document.getElementById('painel-cadeiras').textContent = mesa.cadeiras;
     document.getElementById('painel-status').value = mesa.status;
 
+
     console.log('Atualizando painel lateral com a mesa:', mesa);
     mesaSelecionada = mesa;
 
     document.querySelectorAll('.input-mesa-id').forEach(input => {
         input.value = mesa.id;
     });
+    document.getElementById('input-mesa-id-pedido').value = mesa.id;
+    document.getElementById('input-mesa-status-pedido').value = mesa.status;
 
 }
 
 // Adiciona evento de clique a cada item do dropdown de status
 document.querySelectorAll('.status-mesa').forEach(item => {
     item.addEventListener('click', function (event) {
-        event.preventDefault();        
+        event.preventDefault();
 
 
-        
+
 
         // Atualiza o texto do botão de status no painel lateral
         atualizarCorMesa(mesaSelecionada, novoStatus);
@@ -80,4 +83,72 @@ function adicionarCardMesa(mesa) {
 
 function ucfirst(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const modalElement = document.getElementById('modalCardapio');
+    const btnAdicionar = document.getElementById('btn-adicionar-pedido');
+
+    // 1. Cria o modal
+    let modalCardapio = null;
+    if (modalElement && typeof bootstrap !== 'undefined') {
+        modalCardapio = new bootstrap.Modal(modalElement);
+    }
+
+
+    btnAdicionar.addEventListener('click', function (e) {
+        e.preventDefault(); // Impede comportamentos estranhos do botão
+
+        const inputMesaId = document.getElementById('input-mesa-id-pedido');
+        const inputMesaStatus = document.getElementById('input-mesa-status-pedido');
+
+        //VALIDAÇÕES
+        if (inputMesaId.value === "") {
+            exibirErro("Por favor, selecione ou informe o número da mesa!");
+            return;
+        }
+
+        if (inputMesaStatus.value === 'livre' || inputMesaStatus.value === 'reservada') {
+            exibirErro("A mesa deve estar ocupada para fazer um pedido!");
+            return;
+        }
+
+        //SINCRONIZAÇÃO
+        // const inputsNoModal = document.querySelectorAll('.input-mesa-selecionada');
+        // inputsNoModal.forEach(input => {
+        //     input.value = inputMesaId.value;
+        // });
+
+        //ABERTURA DO MODAL
+        if (modalCardapio) {
+            modalCardapio.show();
+        }
+
+    });
+
+});
+
+
+
+function exibirErro(mensagem) {
+    const container = document.getElementById('container-erros');
+
+    const htmlErro = `<div class="toast-container position-fixed top-0 end-0 p-3">
+        <div class="toast show" role="alert">
+            <div class="toast-header bg-danger text-white">
+                <strong class="me-auto">Erro</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body">              
+                    <p class="mb-1">${mensagem}</p>
+            </div>
+        </div>
+    </div>`
+
+    container.innerHTML = htmlErro;
+
 }
