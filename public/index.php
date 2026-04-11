@@ -38,12 +38,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         login();
     }
 
-    if ($rota === 'pedidos' && $acao === 'adicionar') {
-    adicionarPedido();
-    }
-    if ($rota === 'pedidos' && $acao === 'alterarStatus') {
-    alterarStatusPedido();
-    }
+    
+    // if ($rota === 'pedidos' && $acao === 'alterarStatus') {
+    // alterarStatusPedido();
+    // }
 
 }
 
