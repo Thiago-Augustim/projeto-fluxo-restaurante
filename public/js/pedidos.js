@@ -12,25 +12,39 @@ document.getElementById('listaPedidos').addEventListener('click', function (e) {
 
 function atualizarPainel(pedido) {
     document.getElementById('painel-titulo').innerHTML = 'PEDIDO<br>#' + pedido.id;
-    document.getElementById('painel-mesa').textContent  = String(pedido.mesa_id).padStart(2, '0');
+    document.getElementById('painel-mesa').textContent  = (pedido.numeroMesa).padStart(2, '0');
     document.getElementById('input-pedido-id').value    = pedido.id;
 
     const container = document.getElementById('painel-itens');
-    if (!pedido.itens || pedido.itens.length === 0) {
+    if (!pedido.itens|| pedido.itens.length === 0) {
         container.innerHTML = '<p class="text-muted">Sem itens.</p>';
         return;
     }
+    const itensPedido = pedido.itens;
+    console.log(itensPedido);
 
-    let html = '';
-    pedido.itens.forEach(item => {
+   let html = '';
+    Object.values(pedido.itens).forEach(item => {
+       
+        
+        const nome = item.nome || 'Item';
+        const quantidade  = item.quantidade;
+        const preco = item.preco ? `R$ ${parseFloat(item.preco).toFixed(2)}` : '';
+        console.log(nome);
+        console.log(quantidade);
+        console.log(preco);
+
         html += `
         <div class="bg-light border rounded-3 p-2 mb-2">
-            <strong>${item.nome}</strong>
-            <div class="text-muted" style="font-size:0.85rem;">
-                ${item.obs ? item.obs + ' ' : ''}${item.qtd}x
+            <div class="d-flex justify-content-between align-items-center">
+                <strong>${nome}</strong>
+                <span class="badge bg-primary rounded-pill">${quantidade}x</span>
             </div>
+            <div class="text-muted small">${preco}</div>
         </div>`;
     });
+
+    // 4. Injeta o HTML construído no container
     container.innerHTML = html;
 }
 
