@@ -9,7 +9,7 @@ document.getElementById('listaMesas').addEventListener('click', function (e) {
     if (!card) return;
     
     document.querySelectorAll('.card-mesa').forEach(c => c.style.outline = 'none');
-    card.style.outline = '2px solid var(--buttonsColor)';
+    card.style.outline = '3px solid var(--buttonsColor)';
 
     const mesa = JSON.parse(card.dataset.mesa);
     console.log('Mesa selecionada:', mesa);

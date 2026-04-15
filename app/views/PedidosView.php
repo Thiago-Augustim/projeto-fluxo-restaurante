@@ -31,7 +31,7 @@ $statusColors = [
             <div class="d-flex flex-column m-4 gap-3" style="min-height: 0;">
 
                 <!-- Filtros -->
-                <div class="d-flex gap-2 flex-wrap p-3 bg-cinzaClaro rounded-4">
+                <div class="d-flex gap-2 flex-wrap p-3 bg-cinzaClaro rounded-4 justify-content-evenly">
                     <?php foreach ($statusLabels as $key => $label): ?>
                         <button class="btn btn-filtro px-4 rounded-pill"
                             data-status="<?= $key ?>"

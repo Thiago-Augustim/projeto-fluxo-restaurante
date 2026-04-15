@@ -4,7 +4,7 @@ require_once MIDDLEWARES . 'Auth.php';
 
 function pedidosIndex(): void
 {
-   
+
     if (!isset($_SESSION['pedidos'])) {
         $_SESSION['pedidos'] = require MODELS . 'Pedidos.php';
     }
@@ -34,11 +34,11 @@ function cadastrarPedido(): void
         $_SESSION['pedidos'] = [];
     }
 
-    $_SESSION['pedidos'] [] = [
+    $_SESSION['pedidos'][] = [
         'id' => count($_SESSION['pedidos']) + 1,
         'numeroMesa' => $numeroMesa,
         'status' => "aguardando",
-        'itens'=> $itens
+        'itens' => $itens
     ];
 
 
@@ -59,8 +59,18 @@ function alterarStatusPedido(): void
         exit();
     }
 
+
+
     foreach ($_SESSION['pedidos'] as &$pedido) {
         if ($pedido['id'] == $id) {
+
+            //Se o pedido estiver cancelado ou concluido, nao pode ser alterado
+            if ($pedido['status'] == 'cancelado' || $pedido['status'] == 'concluido') {
+                $_SESSION['erros'] = ['O pedito está ' . $pedido['status'] . '. Não pode ser alterado'];
+                header('Location: ' . BASE_URL . '?rota=pedidos');
+                exit();
+            }
+
             $pedido['status'] = $status;
             break;
         }

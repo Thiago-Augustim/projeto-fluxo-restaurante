@@ -79,15 +79,16 @@ function fecharComanda(): void
     $mesa = $_POST['mesa'] ?? null;
 
     if (!$mesa) {
+        $_SESSION['erros'] = ['Selecione uma comanda para finalizar'];
         header("Location: " . BASE_URL . "?rota=comandas");
-        exit;
+        exit();
     }
 
     $_SESSION['pedidos'] = $_SESSION['pedidos'] ?? [];
-    $_SESSION['comandasFechadas'] = $_SESSION['comandasFechadas'] ?? [];
+    //$_SESSION['comandasFechadas'] = $_SESSION['comandasFechadas'] ?? [];
     $_SESSION['mesas'] = $_SESSION['mesas'] ?? [];
 
-    // salvar comanda antes de apagar (opcional, mas correto)
+    // salvar comanda antes de apagar 
     $comandaFechada = [
         'mesa' => $mesa,
         'itens' => [],
@@ -100,6 +101,15 @@ function fecharComanda(): void
         if ($pedido['numeroMesa'] != $mesa || $pedido['status'] === 'cancelado') {
             continue;
         }
+
+        //Verifica se todos os pedidos das comandas foram concluidos
+        if ($pedido['status'] != 'concluido' && $pedido['status'] != 'cancelado') {
+            $_SESSION['erros'] = ['Há pedidos que não foram concluidos na mesa ' . $pedido['numeroMesa'] . '. Todos deves estar concluidos para fechar a comanda!'];
+            header("Location: " . BASE_URL . "?rota=comandas"); 
+            exit();
+        }
+
+
 
         foreach ($pedido['itens'] as $item) {
 

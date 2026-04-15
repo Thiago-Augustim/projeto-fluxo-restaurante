@@ -102,7 +102,7 @@ include VIEWS . 'partials/header.php';
                 </div>
 
                 <div class="p-3 bg-cinzaClaro rounded-4 me-4 ms-4 flex-grow-1">
-                    <h5>Pedidos da Mesa</h5>
+                    
                     <div class="d-flex justify-content-center bg">
 
                         <form action="">

@@ -25,12 +25,6 @@
         </li>
     <?php endif; ?>
 
-    <?php if (permissoeMenu('relatorios')): ?>
-        <li class="nav-item ms-5">
-            <a class="nav-link <?php echo $paginaAtiva === 'relatorios' ? 'active' : '' ?>" href="#" onclick="location.replace('<?php echo BASE_URL; ?>?rota=relatorios');return false;">Relatórios</a>
-        </li>
-    <?php endif; ?>
-
     
         <li class="nav-item ms-auto me-3">
             <span class="text-white me-3"><?= $_SESSION['funcionarioLogado']['nome'] ?? 'Usuário' ?></span>
